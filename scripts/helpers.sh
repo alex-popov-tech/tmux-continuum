@@ -25,9 +25,10 @@ current_tmux_server_pid() {
 all_tmux_processes() {
 	# ignores `tmux source-file .tmux.conf` command used to reload tmux.conf
 	local user_id=$(id -u)
-	ps -u $user_id -o "command pid" |
-		\grep "^tmux" |
-		\grep -v "^tmux source"
+  ps -u $user_id -o "command pid" |
+      \grep "^tmux" |
+      \grep -v "^tmux source" |
+      \grep -v "^tmux attach"
 }
 
 number_tmux_processes_except_current_server() {
